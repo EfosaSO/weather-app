@@ -43,7 +43,7 @@ export function loadWeather(city, country) {
     if (city && country) {
     return fetchWeather(city, country)
       .then(response => dispatch(loadWeatherSuccess(response)))
-      .catch(error => dispatch(loadWeatherFailure(error)));
+      .catch(error => dispatch(loadWeatherFailure({error, city, country})));
     } else {
       return dispatch(loadWeatherFailure({error:"Please input search values..."}))
     }

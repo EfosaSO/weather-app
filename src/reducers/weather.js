@@ -11,15 +11,17 @@ const initialState = {
 export default function weather(state = initialState, action) {
   switch (action.type) {
     case LOADING_SUCCESS:
-      return {
+      return Object.assign({}, state, {
         temperature: action.payload.weather.main.temp,
         city: action.payload.weather.name,
         country: action.payload.weather.sys.country,
         description: action.payload.weather.weather[0].description,
         error: ''
-      };
+      })
     case LOADING_FAILURE:
-      return action.payload.error;
+      return {
+        error:`Can't find ${action.payload.error.city}, ${action.payload.error.country}`
+      };
     default:
       return state;
   }
