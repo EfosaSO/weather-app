@@ -39,8 +39,13 @@ function loadWeatherFailure(error) {
 export function loadWeather(city, country) {
   return dispatch => {
     dispatch(startLoading());
+
+    if (city && country) {
     return fetchWeather(city, country)
       .then(response => dispatch(loadWeatherSuccess(response)))
       .catch(error => dispatch(loadWeatherFailure(error)));
+    } else {
+      return dispatch(loadWeatherFailure({error:"Please input search values..."}))
+    }
   }
 }

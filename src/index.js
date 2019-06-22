@@ -7,11 +7,14 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 
 import App from './components/AppContainer';
-import reducer from './reducers';
+import rootReducer from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(rootReducer, composeEnhancers(
+  applyMiddleware(thunk)),
+  window.__REDUX_DEVTOOLS_EXTENSION && window.__REDUX_DEVTOOLS_EXTENSION()
+  );
 
 ReactDOM.render(
   <Provider store={store}>
