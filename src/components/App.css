@@ -90,6 +90,11 @@ button:active {
   display: flex;
   flex-direction: row;
   border-bottom: #eef151d0 solid 0.5px;
+  margin-bottom: 1em;
+}
+
+.weather-info button{
+  margin-bottom: 1rem;
 }
 
 .weather-stat {

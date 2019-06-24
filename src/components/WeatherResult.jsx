@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toCelsius from '../utils/toCelsius';
 
-export default function WeatherResult({ country, city, temperature, description }) {
+const WeatherResult = ({ country, city, temperature, description, index, removeWeather }) =>{
   return (
     <div>
       {
@@ -20,11 +20,18 @@ export default function WeatherResult({ country, city, temperature, description 
             <span className="weather-key">Conditions:&nbsp;</span>
             <span className="weather-value">{description}</span>
           </div>
+          <button onClick={()=>{
+            return removeWeather(index)
+          }}>
+            Remove
+          </button>
         </div>
       }
     </div>
   );
 }
+
+export default WeatherResult;
 
 WeatherResult.propTypes = {
   country: PropTypes.string,

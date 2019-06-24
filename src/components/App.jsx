@@ -1,5 +1,5 @@
 import React from 'react';
-import WeatherResult from './WeatherResult';
+import WeatherResult from './WeatherContainer';
 import SearchForm from './SearchForm';
 // import { fetchWeather } from '../actions/weatherActions';
 import './App.css';
@@ -69,12 +69,18 @@ class App extends React.Component {
         <div className="wrapper">
           <div className="main">
             <SearchForm loadWeather={this.getWeather} error={this.props.weather.error} />
-            <WeatherResult
-              temperature={this.props.weather.temperature}
-              city={this.props.weather.city}
-              country={this.props.weather.country}
-              description={this.props.weather.description}
-            />
+            {this.props.weather.map((item, index)=>{
+             return (
+             <WeatherResult
+                temperature={item.temperature}
+                city={item.city}
+                country={item.country}
+                description={item.description}
+                index={index}
+              />
+              )
+
+            })}
           </div>
         </div>
       </div>);
