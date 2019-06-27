@@ -2,6 +2,7 @@ import {
 	LOADING_SUCCESS,
 	LOADING_FAILURE,
 	REMOVE_RESULT,
+	EMPTY_SEARCH,
 } from "../actions/weatherActionTypes";
 
 const initialState = [];
@@ -16,12 +17,11 @@ export default function weather(state = initialState, action) {
 					city: action.payload.weather.name,
 					country: action.payload.weather.sys.country,
 					description: action.payload.weather.weather[0].description,
-					error: "",
 				},
 			];
 		case REMOVE_RESULT:
 			return state.filter((weather, index) => {
-				return index !== action.payload.index;
+				return index !== action.payload.id;
 			});
 
 		case LOADING_FAILURE:
@@ -30,6 +30,10 @@ export default function weather(state = initialState, action) {
 					action.payload.error.country
 				}`,
 			};
+
+			case EMPTY_SEARCH:
+				return action.payload.error;
+				
 		default:
 			return state;
 	}

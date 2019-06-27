@@ -3,6 +3,7 @@ import {
 	LOADING_SUCCESS,
 	LOADING_FAILURE,
 	REMOVE_RESULT,
+	EMPTY_SEARCH,
 } from "./weatherActionTypes";
 
 const Api_Key = "54360e056cc0866724607dadfbe71bc2";
@@ -42,11 +43,20 @@ function loadWeatherFailure(error) {
 	};
 }
 
-export function removeResult(index) {
+function emptyWeatherSearch(error) {
+	return {
+		type: EMPTY_SEARCH,
+		payload: {
+			error,
+		},
+	};
+}
+
+export function removeResult(id) {
 	return {
 		type: REMOVE_RESULT,
 		payload: {
-			index,
+			id,
 		},
 	};
 }
@@ -58,11 +68,21 @@ export function loadWeather(city, country) {
 		if (city && country) {
 			return fetchWeather(city, country)
 				.then(response => dispatch(loadWeatherSuccess(response)))
-				.catch(error => dispatch(loadWeatherFailure(error)));
-		} else {
+				.catch(error => dispatch(loadWeatherFailure({ error, city, country })));
+		}
+		
+		if (!city && country) {
+			return dispatch(emptyWeatherSearch({ error: "Please input city value." }));
+		}
+		
+		if (city && !country) {
 			return dispatch(
-				loadWeatherFailure({ error: "Please input search values..." })
+				emptyWeatherSearch({ error: "Please input a country value." })
 			);
 		}
+		
+		return dispatch(
+			emptyWeatherSearch({ error: "Please input search values..." })
+		);
 	};
 }
