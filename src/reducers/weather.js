@@ -27,7 +27,7 @@ export default function weather(state = initialState, action) {
         ]
       };
     case REMOVE_RESULT:
-		// Refactored, was returning state before and changing object structure 
+      // Refactored, was returning state before and changing object structure
       state.results = state.results.filter((weather, index) => {
         return index !== action.payload.key;
       });
@@ -37,7 +37,7 @@ export default function weather(state = initialState, action) {
 
     case LOADING_FAILURE:
       return {
-		  // Spreading state here to keep existing valid items for UX improvements
+        // Spreading state here to keep existing valid items for UX improvements
         ...state,
         error: `Can't find ${action.payload.error.city}, ${
           action.payload.error.country
@@ -46,6 +46,7 @@ export default function weather(state = initialState, action) {
 
     case EMPTY_SEARCH:
       return {
+        ...state,
         error: action.payload.error
       };
 

@@ -11,8 +11,6 @@ const WeatherResult = ({
   error,
   removeWeather
 }) => {
-	console.log("Error:",error);
-	
   return (
     <div>
       {country && (

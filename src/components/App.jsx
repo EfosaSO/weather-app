@@ -38,7 +38,8 @@ class App extends React.Component {
                         country={item.country}
                         description={item.description}
                       />
-                    );
+					);
+					return null;
                 })
               : null}
           </div>
