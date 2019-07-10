@@ -3,7 +3,7 @@ import { loadWeather } from "../actions/weatherActions";
 import App from "./App";
 
 const mapStateToProps = state => ({
-	weather: state.weather,
+	weather: state.weather
 });
 
 function mapDispatchToProps(dispatch) {
